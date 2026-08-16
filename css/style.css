@@ -1,5 +1,3 @@
-/* Unity Gameplay Programmer Portfolio — Solid colors, no gradients */
-
 :root {
   color-scheme: dark;
 
@@ -817,7 +815,7 @@ pre code {
 
 .project-video-wrap--portrait {
   aspect-ratio: 636 / 1416;
-  max-height: 430px;
+  max-height: 390px;
   align-self: center;
   justify-self: center;
 }
