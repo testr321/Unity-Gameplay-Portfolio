@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bryan Bong — Unity Gameplay Programmer. Gameplay systems, UI, multiplayer, and mobile/WebGL development.">
+  <meta property="og:title" content="Bryan Bong — Unity Gameplay Programmer">
+  <meta property="og:description" content="Unity gameplay programmer at Star Splash Game Studio. Contributed gameplay, minigames, and UI on Fun with Chinese 2. Gameplay systems, UI, and multiplayer for mobile and WebGL.">
+  <meta property="og:type" content="website">
+  <title>Bryan Bong — Unity Gameplay Programmer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-brand">Bryan Bong</a>
+      <div class="nav-group">
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+        </ul>
+        <div class="nav-controls">
+          <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+          </button>
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="container">
+      <span class="hero-badge">Open to full-time · Gameplay Programming</span>
+      <h1 class="hero-name">Bryan Bong</h1>
+      <p class="hero-title">Unity Gameplay Programmer</p>
+      <div class="hero-tags">
+        <span class="tag">C#</span>
+        <span class="tag">Unity</span>
+        <span class="tag">Gameplay Systems</span>
+        <span class="tag">Multiplayer</span>
+        <span class="tag">Mobile &amp; WebGL</span>
+      </div>
+      <p class="hero-summary">
+        Gameplay programmer at Star Splash Game Studio. I contributed gameplay, minigames, and UI on <a href="https://apps.apple.com/us/app/fun-with-chinese-2/id6496847596" target="_blank" rel="noopener">Fun with Chinese 2</a>.
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/testr321" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://testr123.itch.io" class="btn btn-secondary" target="_blank" rel="noopener">itch.io</a>
+        <a href="https://www.linkedin.com/in/bryan-bong/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="hero-contact">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+        <a href="mailto:bryanbong3365@gmail.com">bryanbong3365@gmail.com</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Portfolio</span>
+          <h2>Featured Projects</h2>
+          <p>A Unity restaurant sim with NPC AI, a mobile survival game driven by a timer-pool difficulty loop, and a 72-hour Nokia-styled platformer. Gameplay footage is shown first — playable builds and technical breakdowns are linked from each card.</p>
+        </div>
+
+        <div class="project-index-list">
+
+          <article class="project-index-card project-card--perimeter">
+            <div class="project-video-wrap">
+              <video controls muted loop playsinline poster="assets/images/cooking-simulator-poster.jpg" data-autoplay preload="none" aria-label="Cooking Simulator gameplay">
+                <source src="assets/videos/cooking-simulator-gameplay.mp4" type="video/mp4">
+              </video>
+              <div class="video-placeholder" style="background-image:url('assets/images/cooking-simulator-poster.jpg')">
+                <span class="label">Gameplay Footage</span>
+              </div>
+            </div>
+            <div class="project-index-meta">
+              <span class="project-genre-badge">3D Simulation</span>
+              <h3><a href="projects/cooking-simulator.html">Cooking Simulator</a></h3>
+              <div class="project-meta-grid">
+                <div class="meta-item"><strong>Team:</strong> Solo (Course)</div>
+                <div class="meta-item"><strong>Duration:</strong> ~4 months</div>
+                <div class="meta-item"><strong>Engine:</strong> Unity 2022 LTS · WebGL</div>
+              </div>
+              <p>3D restaurant simulator with NavMesh NPC queueing, data-driven food orders via Scriptable Objects, pick-up/drop item handling, and order validation against plated items. Shipped as a WebGL demo.</p>
+              <ul class="systems-list">
+                <li>NPC Queue AI</li>
+                <li>Order System</li>
+                <li>Pick Up / Drop</li>
+                <li>Scriptable Objects</li>
+                <li>WebGL</li>
+              </ul>
+              <div class="project-card-actions">
+                <div class="project-card-actions-start">
+                  <a href="https://testr123.itch.io/cooking-simulator-demo" class="btn btn-itch" target="_blank" rel="noopener">Play on itch.io</a>
+                  <a href="https://github.com/testr321/3D-Game-Programming" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+                </div>
+                <a href="projects/cooking-simulator.html" class="btn btn-primary">Technical Breakdown →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-index-card project-card--vector">
+            <div class="project-video-wrap project-video-wrap--portrait">
+              <video controls muted loop playsinline poster="assets/images/light-dodge-poster.jpg" data-autoplay preload="none" aria-label="Light Dodge gameplay">
+                <source src="assets/videos/light-dodge-gameplay.mp4" type="video/mp4">
+              </video>
+              <div class="video-placeholder" style="background-image:url('assets/images/light-dodge-poster.jpg')">
+                <span class="label">Gameplay Footage</span>
+              </div>
+            </div>
+            <div class="project-index-meta">
+              <span class="project-genre-badge">2D Hyper Casual</span>
+              <h3><a href="projects/light-dodge.html">Light Dodge</a></h3>
+              <div class="project-meta-grid">
+                <div class="meta-item"><strong>Team:</strong> Solo (Course)</div>
+                <div class="meta-item"><strong>Duration:</strong> ~2 months</div>
+                <div class="meta-item"><strong>Engine:</strong> Unity 2022 LTS · Mobile</div>
+              </div>
+              <p>Mobile survival dodge game. A timer pool grows while you stay clear and drains on hits — that pool drives player size and speed, with edge-spawning light bars and a five-stage tutorial.</p>
+              <ul class="systems-list">
+                <li>Timing Mechanics</li>
+                <li>Timer Pool</li>
+                <li>Tutorial System</li>
+                <li>Joystick Controls</li>
+                <li>Mobile</li>
+              </ul>
+              <div class="project-card-actions">
+                <div class="project-card-actions-start">
+                  <a href="https://testr123.itch.io/light-dodge" class="btn btn-itch" target="_blank" rel="noopener">Play on itch.io</a>
+                  <a href="https://github.com/testr321/Game-Production" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+                </div>
+                <a href="projects/light-dodge.html" class="btn btn-primary">Technical Breakdown →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-index-card project-card--signal">
+            <div class="project-video-wrap">
+              <video controls muted loop playsinline poster="assets/images/basiliks-leap-poster.jpg" data-autoplay preload="none" aria-label="Basiliks Leap gameplay">
+                <source src="assets/videos/basiliks-leap-gameplay.mp4" type="video/mp4">
+              </video>
+              <div class="video-placeholder" style="background-image:url('assets/images/basiliks-leap-poster.jpg')">
+                <span class="label">Gameplay Footage</span>
+              </div>
+            </div>
+            <div class="project-index-meta">
+              <span class="project-genre-badge">Retro</span>
+              <h3><a href="projects/basiliks-leap.html">Basiliks Leap</a></h3>
+              <div class="project-meta-grid">
+                <div class="meta-item"><strong>Team:</strong> 4 (Game Jam)</div>
+                <div class="meta-item"><strong>Duration:</strong> 72 hours</div>
+                <div class="meta-item"><strong>Engine:</strong> Godot 4.2 · NokiaJam6</div>
+              </div>
+              <p>NokiaJam6 entry with a 4-person team — I owned the gameplay systems. Nokia 3310-styled platformer with gravity fall, breakable platforms, and teleport gates, on an 84×48 LCD screen at 15 FPS.</p>
+              <ul class="systems-list">
+                <li>Gravity Fall</li>
+                <li>Precision Platforming</li>
+                <li>Breakable Tiles</li>
+                <li>Teleport Gates</li>
+                <li>WebGL</li>
+              </ul>
+              <div class="project-card-actions">
+                <div class="project-card-actions-start">
+                  <a href="https://kengikita.itch.io/basiliks-leap" class="btn btn-itch" target="_blank" rel="noopener">Play on itch.io</a>
+                  <a href="https://github.com/testr321/NOKIA-3310-GameJam" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+                </div>
+                <a href="projects/basiliks-leap.html" class="btn btn-primary">Technical Breakdown →</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Expertise</span>
+          <h2>Technical Skills</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Languages</h3>
+            <ul>
+              <li>C#</li>
+              <li>JavaScript (Node.js)</li>
+              <li>GDScript</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Unity</h3>
+            <ul>
+              <li>Gameplay Systems</li>
+              <li>UGUI &amp; UI Toolkit</li>
+              <li>Scriptable Objects</li>
+              <li>New Input System</li>
+              <li>NavMesh AI</li>
+              <li>Animation</li>
+              <li>WebGL / Mobile builds</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Architecture</h3>
+            <ul>
+              <li>Event-Driven Architecture</li>
+              <li>MVC Pattern</li>
+              <li>REST API Integration</li>
+              <li>Multiplayer (Socket.IO)</li>
+              <li>JSON Serialization</li>
+              <li>Firebase</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Tools</h3>
+            <ul>
+              <li>Git</li>
+              <li>Godot 4</li>
+              <li>Postman</li>
+              <li>Visual Studio / Rider</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Professional</span>
+          <h2>Experience</h2>
+        </div>
+        <div class="experience-list">
+          <article class="experience-card">
+            <div class="experience-header">
+              <div>
+                <h3>Unity Gameplay Programmer</h3>
+                <p class="experience-company">Star Splash Game Studio SDN BHD</p>
+                <p class="experience-product">
+                  Fun with Chinese 2
+                  · <a href="https://apps.apple.com/us/app/fun-with-chinese-2/id6496847596" target="_blank" rel="noopener">App Store</a>
+                  · <a href="https://play.google.com/store/apps/details?id=hk.edu.polyu.cbs.cfc.funwithchinese2" target="_blank" rel="noopener">Google Play</a>
+                </p>
+              </div>
+              <time class="experience-date" datetime="2024-01">January 2024 – Present</time>
+            </div>
+            <ul class="experience-details">
+              <li>Contributed gameplay and minigames for Fun with Chinese 2, a Unity learning RPG for children aged 3–8 (C-for-Chinese@JC) — audio storybooks, quests, rewards, and skill-building minigame systems with progressive difficulty across listening, speaking, and reading</li>
+              <li>Implemented production UI from designer specs in UGUI and UI Toolkit — story, quest, and reward flows for young children on phone and tablet</li>
+              <li>Debugged session flow, UI, and device performance on iOS 15+ and Android</li>
+              <li>Integrated Unity clients with Node.js REST APIs and Socket.IO multiplayer; profiled WebGL and mobile builds across studio titles</li>
+            </ul>
+            <div class="experience-tech">
+              <span>Unity</span>
+              <span>C#</span>
+              <span>Node.js</span>
+              <span>Socket.IO</span>
+              <span>REST APIs</span>
+              <span>UGUI</span>
+              <span>UI Toolkit</span>
+              <span>Android</span>
+              <span>iOS</span>
+              <span>WebGL</span>
+            </div>
+          </article>
+
+          <article class="experience-card">
+            <div class="experience-header">
+              <div>
+                <h3>Software Development Intern</h3>
+                <p class="experience-company">Perksense / MyKoodoo</p>
+              </div>
+              <time class="experience-date" datetime="2023-07">July 2023 – October 2023</time>
+            </div>
+            <ul class="experience-details">
+              <li>Built Firebase Cloud Functions for backend automation</li>
+              <li>Implemented push notifications with Firebase Cloud Messaging</li>
+              <li>Worked with Firebase Authentication and Firestore</li>
+              <li>Supported mobile backend services and Git-based team workflows</li>
+            </ul>
+            <div class="experience-tech">
+              <span>Firebase</span>
+              <span>Cloud Functions</span>
+              <span>Cloud Messaging</span>
+              <span>Firestore</span>
+              <span>Authentication</span>
+              <span>Git</span>
+            </div>
+          </article>
+
+          <article class="experience-card experience-card--education">
+            <div class="experience-header">
+              <div>
+                <h3>Education</h3>
+                <p class="experience-company">Multimedia University</p>
+              </div>
+              <time class="experience-date" datetime="2018">2018 – 2024</time>
+            </div>
+            <ul class="experience-details">
+              <li>BSc Computer Science, Game Development (2020–2024) — CGPA 3.44</li>
+              <li>Diploma in Information Technology (2018–2020)</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>Bryan Bong — Unity Gameplay Programmer</span>
+      <div class="footer-links">
+        <a href="https://github.com/testr321" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://testr123.itch.io" target="_blank" rel="noopener">itch.io</a>
+        <a href="https://www.linkedin.com/in/bryan-bong/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:bryanbong3365@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

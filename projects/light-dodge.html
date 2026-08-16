@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Light Dodge — mobile survival timing mechanics, joystick controls, and timer-pool technical breakdown.">
+  <title>Light Dodge — Bryan Bong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <script src="../js/theme-init.js"></script>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="container">
+      <a href="../index.html" class="nav-brand">Bryan Bong</a>
+      <div class="nav-group">
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#skills">Skills</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+        </ul>
+        <div class="nav-controls">
+          <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+          </button>
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container content-narrow">
+      <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+
+      <h1>Light Dodge</h1>
+      <p>2D mobile survival game built for a Game Production module. A timer pool grows while you stay clear of obstacles and drains on hits, boundary bounces, or releasing input. That pool drives player scale and speed. Survival time is a separate score. Light bars spawn at the screen edges and drift across the arena.</p>
+
+      <div class="project-hero-video">
+        <div class="project-video-wrap project-video-wrap--portrait">
+          <video controls muted loop playsinline poster="../assets/images/light-dodge-poster.jpg" data-autoplay preload="none" aria-label="Light Dodge gameplay">
+            <source src="../assets/videos/light-dodge-gameplay.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder" style="background-image:url('../assets/images/light-dodge-poster.jpg')">
+            <span class="label">Gameplay Footage</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="project-play-links">
+        <h2>Play &amp; Links</h2>
+        <div class="project-external-links">
+          <a href="https://testr123.itch.io/light-dodge" class="btn btn-itch" target="_blank" rel="noopener">Play on itch.io</a>
+          <a href="https://github.com/testr321/Game-Production" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </section>
+
+      <div class="project-meta-bar">
+        <span><strong>Genre:</strong> 2D Survival</span>
+        <span><strong>Team:</strong> Solo (Course)</span>
+        <span><strong>Duration:</strong> ~2 months</span>
+        <span><strong>Engine:</strong> Unity 2022 LTS · Mobile</span>
+        <span><strong>Scripts:</strong> 19 custom C# + Joystick Pack</span>
+      </div>
+
+      <section class="detail-block">
+        <h2>My Contribution</h2>
+        <p>Sole programmer. I designed the timer-pool pressure loop, spawn-delay ramp, tutorial, and mobile arena — 19 custom C# scripts on top of the Joystick Pack.</p>
+        <ul class="contribution-list">
+          <li>Core loop (<code>LogicScript</code>) — timer pool ticks up while <code>collided == 0</code> and drains on hits, boundary bounces, and lost input; survival time is a separate <code>score</code></li>
+          <li>Player (<code>PlayerScript</code>) — Rigidbody2D whose scale (<code>timer * 0.08</code>) and speed derive from the pool, with a shared collide counter so overlapping bars don’t leave a stale “touching” flag</li>
+          <li>Obstacles (<code>LightSpawner</code>, <code>LightBarScript</code>) — bars spawn at a random screen edge, drift, optionally rotate, and destroy past the far side; <code>spawnDelay</code> decays toward a floor every two seconds</li>
+          <li>Five-stage tap-gated tutorial with isolated <code>LogicScriptTutorial</code> / <code>PlayerScriptTutorial</code> copies, plus a resolution-independent arena (<code>CameraSetups</code> from <code>ScreenToWorldPoint</code>) and Joystick Pack input on the base <code>Joystick</code> class</li>
+        </ul>
+      </section>
+
+      <section class="detail-block">
+        <h2>Technical Breakdown</h2>
+        <div class="breakdown-card">
+          <div class="breakdown-label">Problem</div>
+          <p>Hand-tuning difficulty didn’t hold, and the arena had to fit every mobile aspect ratio without per-device layout.</p>
+          <div class="breakdown-label">Solution</div>
+          <p>One timer pool drives scale and speed; <code>spawnDelay</code> ramps on a floor. Boundaries and the joystick are placed from <code>ScreenToWorldPoint</code> at startup. Overlapping bars share a collide count — clear only at zero.</p>
+          <div class="breakdown-label">Result</div>
+          <p>Staying alive makes you a bigger, slower target. Score is survival time in the clear. The same build places the arena correctly on any aspect ratio.</p>
+        </div>
+      </section>
+
+      <section class="detail-block">
+        <h2>Reflection</h2>
+        <div class="two-col">
+          <div class="info-box">
+            <h4>What Went Well</h4>
+            <ul>
+              <li>One difficulty formula produced a tunable pressure curve</li>
+              <li>Joystick base-class abstraction kept input swappable</li>
+              <li>Staged onboarding got new players to a full round quickly</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <h4>What I Would Redesign</h4>
+            <ul>
+              <li>Unify tutorial and main gameplay into one configurable stack</li>
+              <li>Replace static cross-scene state with a proper game manager</li>
+              <li>Object-pool light bars instead of instantiate/destroy per spawn</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>Bryan Bong — Unity Gameplay Programmer</span>
+      <div class="footer-links">
+        <a href="https://github.com/testr321" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://testr123.itch.io" target="_blank" rel="noopener">itch.io</a>
+        <a href="https://www.linkedin.com/in/bryan-bong/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:bryanbong3365@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

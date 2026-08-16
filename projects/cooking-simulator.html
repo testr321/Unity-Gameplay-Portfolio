@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cooking Simulator — NavMesh NPC queueing, data-driven orders, pick-up/drop, and plate validation technical breakdown.">
+  <title>Cooking Simulator — Bryan Bong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <script src="../js/theme-init.js"></script>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="container">
+      <a href="../index.html" class="nav-brand">Bryan Bong</a>
+      <div class="nav-group">
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#skills">Skills</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+        </ul>
+        <div class="nav-controls">
+          <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+          </button>
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container content-narrow">
+      <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+
+      <h1>Cooking Simulator</h1>
+      <p>3D first-person restaurant simulator. NPC customers queue at the door, order from a data-driven menu, and seat themselves as tables free up. The player grabs ingredients, cooks them to the right doneness, plates them, and validates each order against a Scriptable Object recipe before the customer's patience runs out.</p>
+
+      <div class="project-hero-video">
+        <div class="project-video-wrap">
+          <video controls muted loop playsinline poster="../assets/images/cooking-simulator-poster.jpg" data-autoplay preload="none" aria-label="Cooking Simulator gameplay">
+            <source src="../assets/videos/cooking-simulator-gameplay.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder" style="background-image:url('../assets/images/cooking-simulator-poster.jpg')">
+            <span class="label">Gameplay Footage</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="project-play-links">
+        <h2>Play &amp; Links</h2>
+        <div class="project-external-links">
+          <a href="https://testr123.itch.io/cooking-simulator-demo" class="btn btn-itch" target="_blank" rel="noopener">Play on itch.io</a>
+          <a href="https://github.com/testr321/3D-Game-Programming" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </section>
+
+      <div class="project-meta-bar">
+        <span><strong>Genre:</strong> 3D Cooking Sim</span>
+        <span><strong>Team:</strong> Solo (Course)</span>
+        <span><strong>Duration:</strong> ~4 months</span>
+        <span><strong>Engine:</strong> Unity 2022 LTS · WebGL build</span>
+        <span><strong>Scripts:</strong> 24 C# files</span>
+      </div>
+
+      <section class="detail-block">
+        <h2>My Contribution</h2>
+        <p>Sole programmer. I built the full service loop across 24 C# scripts: NavMesh queueing and seating, Scriptable Object orders, cooking state, pick-up/drop, plating, and order validation.</p>
+        <ul class="contribution-list">
+          <li>Order validation (<code>OrderScipt</code> / <code>OrderScript</code>) — OverlapBox finds the plate; <code>PlateScript.GetItemsOnPlate()</code> is matched against a <code>FoodItemScriptableObject</code> (name, cooked, not burned)</li>
+          <li>NPC queue and seating (<code>QueueManager</code>, <code>NPCSpawner</code>, <code>NPCController</code>) on NavMesh — Z-offset slots, chair assignment, queue compression with +5 patience, exit via <code>DestoryManager</code></li>
+          <li>Pick-up/drop and plating (<code>PlayerPickUpDrop</code>, <code>ObjectGrabbable</code>, <code>PlateScript</code>) — raycast grab, kinematic <code>MovePosition</code> lerp, runtime <code>FixedJoint</code>s, no transform parenting</li>
+          <li>Cooking on the item (<code>StoveScript</code> → <code>StartCook</code> / <code>StopCook</code>) with raw → cooked → burned material swaps, plus fridge respawn (<code>ShelfTrigger</code>) and first-person move (<code>PlayerMovement</code>, <code>MouseLook</code>)</li>
+        </ul>
+      </section>
+
+      <section class="detail-block">
+        <h2>Technical Breakdown</h2>
+        <div class="breakdown-card">
+          <div class="breakdown-label">Problem</div>
+          <p>A plate assembled at runtime is a physics stack of joints. Hard-coding dish names broke as soon as a recipe changed, and querying joints for "what's on the plate" was unreliable.</p>
+          <div class="breakdown-label">Solution</div>
+          <p><code>OrderScript</code> OverlapBoxes for the <code>PlateScript</code>, then matches <code>GetItemsOnPlate()</code> against the recipe asset: item name, cooked flag, not burned. Menu entries live on <code>MenuItemsScriptableObject</code> / <code>FoodItemScriptableObject</code>.</p>
+          <div class="breakdown-label">Result</div>
+          <p>A new dish is an asset and a prefab — no code change. The same validator covers burgers, hotdogs, and custom menu items.</p>
+        </div>
+      </section>
+
+      <section class="detail-block">
+        <h2>Reflection</h2>
+        <div class="two-col">
+          <div class="info-box">
+            <h4>What Went Well</h4>
+            <ul>
+              <li>Data-driven menu scaled to new dishes without code changes</li>
+              <li>NavMesh queueing and seating produced believable restaurant flow</li>
+              <li>Joint-based plate stacking gave carry behaviour physical credibility</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <h4>What I Would Redesign</h4>
+            <ul>
+              <li>Replace FindObjectOfType service location with injected references or a service locator</li>
+              <li>Decouple the circular NPCController ↔ PlayerScript calls with an event system</li>
+              <li>Replace static scene gate flags with a proper game state manager</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>Bryan Bong — Unity Gameplay Programmer</span>
+      <div class="footer-links">
+        <a href="https://github.com/testr321" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://testr123.itch.io" target="_blank" rel="noopener">itch.io</a>
+        <a href="https://www.linkedin.com/in/bryan-bong/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:bryanbong3365@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
